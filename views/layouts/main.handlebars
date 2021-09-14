@@ -15,12 +15,12 @@
     </h1>
     <!-- Only display the logout button if the user is logged in -->
     <nav>
-        <button class="btn" id="dashboard">dashboard</button>
-        <button class="btn" id="homepage">homepage</button>
+        <a class="btn" href='/dashboard/' id="dashboard">dashboard</a>
+        <a href='/' class="btn" id="homepage">homepage</a>
       {{#if logged_in}}
         <button class="btn" id="logout">logout</button>
       {{else}}
-        <button class="btn" id="login">login</button>
+        <a class="btn" href='/signup/' id="signup">sign up</a>
       {{/if}}
     </nav>
   </header>

@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { Blog, User } = require('../models');
 const withAuth = require('../utils/auth');
 
-// Prevent non logged in users from viewing the homepage
+// Prevent non logged in Blogs from viewing the homepage
 // WHEN I visit the site for the first time
 // THEN I am presented with the homepage, which includes existing blog posts if any have been posted; 
           //navigation links for the homepage and the dashboard; and the option to log in
@@ -18,18 +18,31 @@ const withAuth = require('../utils/auth');
 // THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
 router.get('/', withAuth, async (req, res) => {
   try {
-    const userData = await User.findAll({
-      attributes: { exclude: ['password'] },
-      order: [['name', 'ASC']],
+    const blogData = await Blog.findAll();
+
+    const blogs = blogData.map((project) => project.get({ plain: true }));
+    console.log(blogs)
+    res.render('homepage', {blogs, 
+      logged_in: req.session.logged_in});
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/blog/:id', withAuth, async (req, res) => {
+  try {
+    const blogData = await Blog.findByPk(req.params.id, {
+      include: {
+          model: User,
+          attributes: ['name'],
+      }
     });
 
-    const users = userData.map((project) => project.get({ plain: true }));
+    const blog = blogData.get({ plain: true });
+    console.log("BLOG: " + blog);
 
-    res.render('homepage', {
-      users,
-      // Pass the logged in flag to the template
-      logged_in: req.session.logged_in,
-    });
+    res.render('blog', {blog, 
+      logged_in: req.session.logged_in });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -45,11 +58,15 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/signup/', (req, res) => {
+  // If a session exists, redirect the request to the homepage
+  res.render('signup');
+});
 
 // WHEN I choose to sign up
-// THEN I am prompted to create a username and password
+// THEN I am prompted to create a Blogname and password
 // WHEN I click on the sign-up button
-// THEN my user credentials are saved and I am logged into the site
+// THEN my Blog credentials are saved and I am logged into the site
 
 
 

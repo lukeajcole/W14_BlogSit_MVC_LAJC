@@ -28,6 +28,7 @@ Blog.init(
     date_created: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW,
         validate: {
             isDate: true    
         }
@@ -39,8 +40,7 @@ Blog.init(
         }
     },
     user_id: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.INTEGER,
       references: {
           model: 'user',
           key: 'id'
