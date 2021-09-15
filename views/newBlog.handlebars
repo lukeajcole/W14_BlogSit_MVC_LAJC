@@ -1,2 +1,14 @@
 {{!-- Prompt to enter title and contents with a create/save button
     When saved, it goes back to dashboard --}}
+
+<form class="form blog-form">
+  <div class="form-group">
+    <label for="title-blog">Title:</label>
+    <input class="form-input" type="text" id="title-blog" defaultValue = "{{blog.title}}" />
+  </div>
+  <div class="form-group">
+    <label for="content-blog">Content:</label>
+    
+    <input class="form-input" type="text" id="content-blog" defaultValue = "{{blog.content}}" />
+  </div>
+</form>

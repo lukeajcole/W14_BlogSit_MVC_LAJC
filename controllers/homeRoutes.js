@@ -16,14 +16,13 @@ const withAuth = require('../utils/auth');
 // THEN I am signed out of the site
 // WHEN I am idle on the site for more than a set time
 // THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const blogData = await Blog.findAll();
 
     const blogs = blogData.map((project) => project.get({ plain: true }));
     console.log(blogs)
-    res.render('homepage', {blogs, 
-      logged_in: req.session.logged_in});
+    res.render('homepage', {blogs});
   } catch (err) {
     res.status(500).json(err);
   }
@@ -31,6 +30,11 @@ router.get('/', withAuth, async (req, res) => {
 
 router.get('/blog/:id', withAuth, async (req, res) => {
   try {
+
+    if (!req.session.logged_in) {
+      res.redirect('/login');
+      return;
+    }
     const blogData = await Blog.findByPk(req.params.id, {
       include: {
           model: User,
@@ -59,15 +63,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/signup/', (req, res) => {
-  // If a session exists, redirect the request to the homepage
   res.render('signup');
 });
-
-// WHEN I choose to sign up
-// THEN I am prompted to create a Blogname and password
-// WHEN I click on the sign-up button
-// THEN my Blog credentials are saved and I am logged into the site
-
-
 
 module.exports = router;

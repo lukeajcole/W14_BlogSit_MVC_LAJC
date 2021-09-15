@@ -4,5 +4,11 @@
     "content": "Woooo it working",
     "date_created": "September 10, 2021 08:30:00",
     "user_id": 1
+  },
+  {
+    "title": "Second Post",
+    "content": "Woooo it's still working",
+    "date_created": "September 14, 2021 08:30:00",
+    "user_id": 2
   }
 ]
