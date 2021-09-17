@@ -46,6 +46,20 @@ router.get('/', withAuth, async (req, res) => {
     }
   });
   
+  router.get('/new', withAuth, async (req, res) => {
+    try {
+  
+      if (!req.session.logged_in) {
+        res.redirect('/login');
+        return;
+      }
+  
+      res.render('newBlog', {logged_in: req.session.logged_in });
+      
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 
 
 module.exports = router;
