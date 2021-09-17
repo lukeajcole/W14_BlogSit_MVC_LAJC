@@ -1,8 +1,11 @@
 {{#each blogs as |blog| }}
-<div class="row align-center mb-5">
+<div class="row align-center mb-5" >
   <div class="col-md-6">
     <h2><a href="/blog/{{blog.id}}">{{blog.title}}</a></h2>
-    <p>{{blog.content}}</p>
+    <p>created: {{format_date blog.date_created}} {{format_time blog.date_created}}</p>
+    {{#if blog.date_updated}}
+    <p>updated: {{format_date blog.date_updated}} {{format_time blog.date_updated}}</p>
+    {{/if}}
   </div>
 </div>
 {{/each}}

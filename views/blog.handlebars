@@ -2,11 +2,38 @@
     the comments are available if logged in
     Comments need comment creator's username and date created --}}
 
-    <div class="row align-center mb-5">
+<div class="row align-center mb-5">
   <div class="col-md-6">
-    <h2>{{blog.title}}</h2>
-    <p>{{blog.name}}</p>
-    <p>{{blog.date_created}}</p>
-    <p>{{blog.content}}</p>
+    <div style="border-style: double; padding: 4px">
+      <h2 style="text-decoration: underline">{{blog.title}}</h2>
+      <p>{{blog.name}}</p>
+      <div hidden='true' id='blog_id' data-value='{{blog.id}}'></div> 
+      <p style="font-weight: bold;">created: {{format_date blog.date_created}} {{format_time blog.date_created}}</p>
+      {{#if blog.date_updated}}
+      <p style="font-weight: bold;">updated: {{format_date blog.date_updated}} {{format_time blog.date_updated}}</p>
+      {{/if}}
+      <p>{{blog.content}}</p>
+    </div>
+    </br>
+    <h2 style="text-decoration: underline">Comments:</h2>
+    {{#each comments as |comment| }}
+      <div style="border-style: solid; padding: 4px">
+        <p style="font-weight: bold;">{{user.name}} commented on {{format_date comment.comment_date_created}} at {{format_time comment.comment_date_created}} </p>
+        <p>{{comment.comment}}</p>
+      </div></br>
+    {{/each}}
+
+  </br></br>
+  <form class="form newComment-form">
+    <h3>New Comment:</h3>
+    <div class="form-group">
+      <textarea id="comment-blog" rows = "5" cols = "111" name = "description"></textarea>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Submit Comment</button>
+    </div>
+  </form>
   </div>
 </div>
+
+<script src="/js/newComment.js"></script>

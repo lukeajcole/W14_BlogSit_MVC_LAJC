@@ -1,0 +1,14 @@
+[
+  {
+    "comment": "comment #1",
+    "comment_date_created": "September 10, 2021 08:30:00",
+    "user_id": 1,
+    "blog_id": 1
+  },
+  {
+    "comment": "comment #2",
+    "comment_date_created": "September 14, 2021 08:30:00",
+    "blog_id": 2,
+    "user_id": 2
+  }
+]

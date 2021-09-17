@@ -4,14 +4,14 @@ might be able to make this same view --}}
 
 
 <form class="form update-form">
-    <div hidden='true' id='post_id' data-value='{{blog.id}}'></div> 
-    <h3>USER: {{blog.user.name}}</h3> 
-    <h3>Date Created: {{format_date blog.date_created}}</h3> 
-  <h3>Title:</h3>  
+    <div hidden='true' id='blog_id' data-value='{{blog.id}}'></div> 
+    <h4>User: {{blog.user.name}}</h4> </br>
+    <h4>Date Created: {{format_date blog.date_created}}</h4> </br>
+  <h4>Title:</h4>  
   <div class="form-group">
     <input class="form-input" type="text" style="width:800px; " id="title-blog" value='{{blog.title}}'/>
   </div>
-  <h3>Content:</h3>
+  <h4>Content:</h4>
   <div class="form-group">
     <textarea id="content-blog" rows = "5" cols = "111" name = "description">{{blog.content}}</textarea>
   </div>
@@ -20,4 +20,4 @@ might be able to make this same view --}}
   </div>
 </form>
 
-<script src="/js/update.js"></script>
+<script src="/js/updateBlog.js"></script>

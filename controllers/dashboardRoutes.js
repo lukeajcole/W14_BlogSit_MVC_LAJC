@@ -37,7 +37,6 @@ router.get('/', withAuth, async (req, res) => {
       });
   
       const blog = blogData.get({ plain: true });
-      console.log("BLOG: " + blog);
   
       res.render('updateBlog', {blog, 
         logged_in: req.session.logged_in });
@@ -55,7 +54,7 @@ router.get('/', withAuth, async (req, res) => {
       }
   
       res.render('newBlog', {logged_in: req.session.logged_in });
-      
+
     } catch (err) {
       res.status(500).json(err);
     }

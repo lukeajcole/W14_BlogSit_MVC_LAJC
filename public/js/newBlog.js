@@ -19,6 +19,10 @@ const newBlogFormHandler = async (event) => {
         body: newBlog,
         headers: { 'Content-Type': 'application/json' },
       });
+
+      if (response) {
+        window.location.replace('/');
+      }
     }
   };
 

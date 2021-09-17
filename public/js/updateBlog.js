@@ -5,7 +5,7 @@ const updateFormHandler = async (event) => {
     // Gather the data from the form elements on the page
     const title = document.querySelector('#title-blog').value.trim();
     const content = document.querySelector('#content-blog').value.trim();
-    const id = document.querySelector('#post_id').getAttribute('data-value');
+    const id = document.querySelector('#blog_id').getAttribute('data-value');
     const updateBody = JSON.stringify({title, content })
     console.log(updateBody);
     if (title && content) {
@@ -15,6 +15,9 @@ const updateFormHandler = async (event) => {
         body: updateBody,
         headers: { 'Content-Type': 'application/json' },
       });
+      if (response) {
+        window.location.replace('/');
+      }
     }
   };
 
