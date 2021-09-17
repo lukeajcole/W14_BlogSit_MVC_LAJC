@@ -16,13 +16,14 @@ const withAuth = require('../utils/auth');
 // THEN I am signed out of the site
 // WHEN I am idle on the site for more than a set time
 // THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
-router.get('/', async (req, res) => {
+router.get('/',async (req, res) => {
   try {
     const blogData = await Blog.findAll();
 
     const blogs = blogData.map((project) => project.get({ plain: true }));
     console.log(blogs)
-    res.render('homepage', {blogs});
+    res.render('homepage', {blogs, 
+      logged_in: req.session.logged_in });
   } catch (err) {
     res.status(500).json(err);
   }
